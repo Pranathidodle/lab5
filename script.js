@@ -23,14 +23,18 @@ function calculate() {
   } else {
     errorMsg.innerText = "";
   }
-
-  // 🔁 RESET when bill = 0
+  
   if (bill === 0) {
-    document.getElementById("tipAmount").value = "";
-    document.getElementById("totalFinal").value = "";
-    document.getElementById("totalTax").value = "";
-    return;
-  }
+  document.getElementById("tipAmount").value = "";
+  document.getElementById("totalFinal").value = "";
+  document.getElementById("totalTax").value = "";
+
+  // 🔥 ADD THESE 2 LINES
+  document.getElementById("tipSlider").value = 0;
+  document.getElementById("tipPercent").value = "0";
+
+  return;
+}
 
   // 🧮 CALCULATIONS
   let tipAmount = (bill * tipPercent) / 100;
