@@ -3,23 +3,36 @@ const form = document.getElementById("tipForm");
 form.addEventListener("input", calculate);
 
 function calculate() {
+  console.log("RUNNING");
+
   let bill = parseFloat(document.getElementById("billTotal").value);
   let tipPercent = parseFloat(document.getElementById("tipSlider").value);
   let isExempt = document.getElementById("taxExempt").checked;
   let currency = document.getElementById("currency").value;
+  let errorMsg = document.getElementById("errorMsg");
 
-  // Validation
+  // 🔴 VALIDATION
   if (isNaN(bill) || bill < 0) {
+    errorMsg.innerText = "Please enter a valid positive number";
+
+    document.getElementById("tipAmount").value = "";
+    document.getElementById("totalFinal").value = "";
+    document.getElementById("totalTax").value = "";
+
+    return;
+  } else {
+    errorMsg.innerText = "";
+  }
+
+  // 🔁 RESET when bill = 0
+  if (bill === 0) {
     document.getElementById("tipAmount").value = "";
     document.getElementById("totalFinal").value = "";
     document.getElementById("totalTax").value = "";
     return;
   }
 
-  // Show tip %
-  document.getElementById("tipPercent").value = tipPercent;
-
-  // Calculations
+  // 🧮 CALCULATIONS
   let tipAmount = (bill * tipPercent) / 100;
 
   let tax = isExempt ? 0 : bill * 0.11;
@@ -27,20 +40,22 @@ function calculate() {
 
   let finalTotal = totalWithTax + tipAmount;
 
-  // Currency conversion (ONLY allowed values)
+  // 🌍 CURRENCY CONVERSION (ONLY allowed values)
   if (currency === "eur") {
     tipAmount *= 0.95;
     finalTotal *= 0.95;
     totalWithTax *= 0.95;
-  } 
-  else if (currency === "inr") {
+  } else if (currency === "inr") {
     tipAmount *= 85;
     finalTotal *= 85;
     totalWithTax *= 85;
   }
 
-  // Output (2 decimal places)
+  // 🟢 OUTPUT (2 decimal places)
   document.getElementById("tipAmount").value = tipAmount.toFixed(2);
   document.getElementById("totalFinal").value = finalTotal.toFixed(2);
   document.getElementById("totalTax").value = totalWithTax.toFixed(2);
+
+  // 🟢 SHOW TIP %
+  document.getElementById("tipPercent").value = tipPercent;
 }
