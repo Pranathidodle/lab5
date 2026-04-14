@@ -4,6 +4,7 @@
   <title>International Tip Calculator</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
@@ -11,37 +12,51 @@
 
   <form id="tipForm">
 
-    <label>Bill Total ($):</label>
+    <!-- BILL INPUT -->
+    <label for="billTotal">Bill Total ($):</label>
     <input type="text" id="billTotal" placeholder="Enter amount">
 
+    <!-- ERROR MESSAGE -->
+    <p id="errorMsg"></p>
+
+    <!-- TAX EXEMPT -->
     <div class="row">
-      <label>Tax Exempt</label>
+      <label for="taxExempt">Tax Exempt</label>
       <input type="checkbox" id="taxExempt">
     </div>
 
+    <!-- TOTAL WITH TAX -->
     <label>Total Bill with Tax (11%):</label>
     <input type="text" id="totalTax" disabled>
 
-    <label>Select Currency:</label>
+    <!-- CURRENCY DROPDOWN -->
+    <label for="currency">Select Currency:</label>
     <select id="currency">
       <option value="usd">US Dollars ($)</option>
       <option value="eur">EUROS (€)</option>
       <option value="inr">Rupees (₹)</option>
     </select>
 
-    <label>Tip:</label>
-    <input type="range" id="tipSlider" min="0" max="100">
+    <!-- TIP SLIDER -->
+    <label for="tipSlider">Tip:</label>
+    <input type="range" id="tipSlider" min="0" max="100" value="0">
+
+    <!-- TIP % DISPLAY -->
     <input type="text" id="tipPercent" disabled>
 
+    <!-- TIP AMOUNT -->
     <label>Converted Tip Amount:</label>
     <input type="text" id="tipAmount" disabled>
 
+    <!-- FINAL TOTAL -->
     <label>Converted Total Bill with Tip and Tax:</label>
     <input type="text" id="totalFinal" disabled>
 
   </form>
 </div>
 
+<!-- JS LINK (VERY IMPORTANT: keep at bottom) -->
 <script src="script.js"></script>
+
 </body>
 </html>
